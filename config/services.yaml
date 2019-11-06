@@ -1,3 +1,6 @@
+imports:
+    - { resource: 'services/security.yaml' }
+
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
 
@@ -25,3 +28,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Symfony\Component\HttpKernel\Kernel: '@kernel'
+
+    App\Service\RegistryService:
+        class: App\Service\RegistryService
+        arguments:
+            - '%env(GUI_URI)%'
+
+    JsonRpcClientBase\Contract\RequestHandlerInterface:
+        class: JsonRpcClientBase\RequestHandler\CurlRequestHandler
+
+    JsonRpcServerCommon\Contract\PasswordEncryptInterface:
+        class: JsonRpcServerCommon\Service\DefaultPasswordEncryptService
+
+    Symfony\Component\HttpFoundation\Request:
+        factory: ['@request_stack', 'getCurrentRequest']

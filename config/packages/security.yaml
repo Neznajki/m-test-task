@@ -1,22 +1,27 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: null }
+        authorizationProvider:
+            id: App\Security\UserProvider
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            pattern: ^/
+            provider: authorizationProvider
+            anonymous: ~
+            guard:
+                authenticators:
+                    - App\Security\AuthorizationModuleLogin
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            logout:
+                path:   app_logout
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '^/provide/token', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/register', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/', roles: ROLE_USER }

@@ -84,6 +84,15 @@
     "monolog/monolog": {
         "version": "1.25.1"
     },
+    "neznajki/authorization-client": {
+        "version": "v0.1.0"
+    },
+    "neznajki/json-rpc-client-base": {
+        "version": "v0.1.0"
+    },
+    "neznajki/json-rpc-common": {
+        "version": "v1.1"
+    },
     "ocramius/package-versions": {
         "version": "1.5.1"
     },

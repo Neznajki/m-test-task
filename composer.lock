@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b4a8e34f49788f7ef6024df28c7cf4a",
+    "content-hash": "b2505397df1f2b719e934ce648fd24bd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1345,6 +1345,108 @@
                 "psr-3"
             ],
             "time": "2019-09-06T13:49:17+00:00"
+        },
+        {
+            "name": "neznajki/authorization-client",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Neznajki/authorization-client.git",
+                "reference": "ecfaf20dfc81192e99c7f70bef79be48a1a61431"
+            },
+            "require": {
+                "neznajki/json-rpc-client-base": "^0.1.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "symfony/http-kernel": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AuthorizationClient\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maris Locmelis",
+                    "email": "neznajki@gmail.com"
+                }
+            ],
+            "description": "authorization client",
+            "time": "2019-11-06T20:23:42+00:00"
+        },
+        {
+            "name": "neznajki/json-rpc-client-base",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Neznajki/json-rpc-client-base.git",
+                "reference": "ed179591eb91d0059defa9e1ef2bdbeaedd8f553"
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "neznajki/json-rpc-common": "^1.1",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "neznajki/codeception-test-engine": "^0.1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonRpcClientBase\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\JsonRpcClientBase\\": "tests/src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maris Locmelis",
+                    "email": "neznajki@gmail.com"
+                }
+            ],
+            "description": "Client Base for Json Rpc Requests",
+            "time": "2019-11-06T19:52:43+00:00"
+        },
+        {
+            "name": "neznajki/json-rpc-common",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Neznajki/json-rpc-common.git",
+                "reference": "ca971ec7c40a624d125436751d4ea18f2541cc6c"
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonRpcServerCommon\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maris Locmelis",
+                    "email": "neznajki@gmail.com"
+                }
+            ],
+            "description": "Storing common contracts for json rpc server",
+            "time": "2019-10-22T18:41:06+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -4525,9 +4627,12 @@
     "platform": {
         "php": ">=7.3",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
-        "ext-json": "*",
-        "ext-curl": "*"
+        "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.3.10"
+    }
 }

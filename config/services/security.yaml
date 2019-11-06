@@ -1,0 +1,21 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    authorization.client.user:
+        class: JsonRpcClientBase\ValueObject\ClientUser
+        arguments:
+            - '%env(AUTH_USER)%'
+            - '%env(AUTH_PASSWORD)%'
+
+    AuthorizationClient\AuthorizationClient:
+        class: AuthorizationClient\AuthorizationClient
+        calls:
+            -   method: setEndpointUrl
+                arguments:
+                    - '%env(AUTH_ENDPOINT)%'
+            -   method: setUser
+                arguments:
+                    - '@authorization.client.user'

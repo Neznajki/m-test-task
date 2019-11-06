@@ -4,7 +4,7 @@
 # installation
 * bash
 ```bash
-echo '127.0.0.1 mintos-test-task.local' | sudo tee -a /etc/hosts
+echo '127.0.0.1 mintos-test-task.local.net' | sudo tee -a /etc/hosts
 git clone git@github.com:Neznajki/mintos-test-task.git
 cd mintos-test-task
 ./connect-docker.sh
