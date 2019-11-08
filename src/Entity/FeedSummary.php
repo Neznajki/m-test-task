@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Contract\ContentIncludedEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="feed_summary", uniqueConstraints={@ORM\UniqueConstraint(name="u_external_id", columns={"external_id"})}, indexes={@ORM\Index(name="type_id", columns={"type_id"}), @ORM\Index(name="xml_base_id", columns={"xml_base_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\FeedSummaryRepository")
  */
-class FeedSummary
+class FeedSummary implements ContentIncludedEntity
 {
     /**
      * @var int
@@ -53,7 +54,7 @@ class FeedSummary
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -77,12 +78,12 @@ class FeedSummary
         return $this;
     }
 
-    public function getExternal(): ?ExternalId
+    public function getExternal(): ExternalId
     {
         return $this->external;
     }
 
-    public function setExternal(?ExternalId $external): self
+    public function setExternal(ExternalId $external): self
     {
         $this->external = $external;
 

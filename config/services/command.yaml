@@ -10,3 +10,11 @@ services:
                     - '@App\Service\FeedParserService'
         tags:
             - { name: 'console.command', command: 'app:import-data' }
+
+    App\Command\CollectWordsCommand:
+        calls:
+            -   method: setHandlerService
+                arguments:
+                    - '@App\Service\WordCollectingService'
+        tags:
+            - { name: 'console.command', command: 'app:words-gather' }

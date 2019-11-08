@@ -55,3 +55,31 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - 'App\Entity\TypeCollection'
+
+    App\Repository\WordSupportedPlaceRepository:
+        class: App\Repository\WordSupportedPlaceRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\WordSupportedPlace'
+
+    App\Repository\WordRepository:
+        class: App\Repository\WordRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\Word'
+
+    App\Repository\FeedFoundWordRepository:
+        class: App\Repository\FeedFoundWordRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\FeedFoundWord'
+
+    App\Repository\WordsTotalOccurrenceRepository:
+        class: App\Repository\WordsTotalOccurrenceRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\WordsTotalOccurrence'

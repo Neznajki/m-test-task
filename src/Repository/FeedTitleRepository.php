@@ -4,10 +4,11 @@
 namespace App\Repository;
 
 
+use App\Contract\ContentGatheringSupport;
+use App\Contract\ContentIncludedEntity;
 use App\Entity\ExternalId;
 use App\Entity\FeedTitle;
 use App\Entity\TypeCollection;
-use App\ValueObject\FeedSummary;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
@@ -21,10 +22,10 @@ use Doctrine\ORM\ORMException;
  * @method FeedTitle[] findAll()
  * @method FeedTitle|null find($id, $lockMode = null, $lockVersion = null)
  */
-class FeedTitleRepository extends EntityRepository
+class FeedTitleRepository extends EntityRepository implements ContentGatheringSupport
 {
     /**
-     * @param FeedSummary $feedEntry
+     * @param \App\ValueObject\FeedTitle $feedEntry
      * @param ExternalId $externalId
      * @param TypeCollection $type
      * @return FeedTitle
@@ -58,5 +59,21 @@ class FeedTitleRepository extends EntityRepository
         $this->getEntityManager()->persist($new);
 
         return $new;
+    }
+
+    /**
+     * @return ContentIncludedEntity[]
+     */
+    public function getEntityWithContentList(): array
+    {
+        $qb = $this->createQueryBuilder('ft');
+
+        $qb->join(ExternalId::class, 'ei', 'WITH', 'ft.external = ei.id');
+        $qb->where('ei.isRemoved =0 OR ei.isHandling = 1');
+
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
     }
 }

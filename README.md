@@ -11,5 +11,7 @@ cd mintos-test-task
 composer install
 ./bin/console c:cl
 ./bin/console d:m:m
+./bin/console ap:i
+./bin/console ap:w
 ```
 

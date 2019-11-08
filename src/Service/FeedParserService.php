@@ -6,30 +6,32 @@ namespace App\Service;
 
 use App\DataObject\FullFeedEntry;
 use App\Downloader\FeedDownloader;
+use App\Repository\ExternalIdRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use SimpleXMLElement;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class FeedParserService
 {
-    /** @var OutputInterface */
-    protected $output;
     /** @var FeedDataConverter */
     protected $feedDataConverter;
     /** @var FeedDataSaverService */
     protected $feedDataSaverService;
     /** @var EntityManagerInterface */
     protected $entityManager;
+    /** @var ExternalIdRepository */
+    protected $externalIdRepository;
 
     public function __construct(
         FeedDataConverter $feedDataConverter,
         FeedDataSaverService $feedDataSaverService,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ExternalIdRepository $externalIdRepository
     ) {
         $this->feedDataConverter    = $feedDataConverter;
         $this->feedDataSaverService = $feedDataSaverService;
         $this->entityManager = $entityManager;
+        $this->externalIdRepository = $externalIdRepository;
     }
 
     /**
@@ -51,7 +53,10 @@ class FeedParserService
      */
     public function convertFeedEntryToEntity(array $feedData): array
     {
-        return $this->feedDataConverter->convertEntryObjectToEntity($feedData);
+        $this->externalIdRepository->importBegan();
+        $fullFeedEntries = $this->feedDataConverter->convertEntryObjectToEntity($feedData);
+
+        return $fullFeedEntries;
     }
 
     /**
@@ -60,22 +65,6 @@ class FeedParserService
     public function saveFeedData()
     {
         $this->entityManager->flush();
-    }
-
-
-    /**
-     * @return OutputInterface
-     */
-    public function getOutput(): OutputInterface
-    {
-        return $this->output;
-    }
-
-    /**
-     * @param OutputInterface $output
-     */
-    public function setOutput(OutputInterface $output): void
-    {
-        $this->output = $output;
+        $this->externalIdRepository->importDone();
     }
 }

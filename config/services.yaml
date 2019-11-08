@@ -48,3 +48,5 @@ services:
         factory: ['@request_stack', 'getCurrentRequest']
 
     App\Service\FeedParserService: ~
+
+    App\Service\WordCollectingService: ~

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Contract\ContentIncludedEntity;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="feed_title", uniqueConstraints={@ORM\UniqueConstraint(name="u_external_id", columns={"external_id"})}, indexes={@ORM\Index(name="type_id", columns={"type_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\FeedTitleRepository")
  */
-class FeedTitle
+class FeedTitle implements ContentIncludedEntity
 {
     /**
      * @var int
@@ -62,7 +63,7 @@ class FeedTitle
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -86,12 +87,12 @@ class FeedTitle
         return $this;
     }
 
-    public function getExternal(): ?ExternalId
+    public function getExternal(): ExternalId
     {
         return $this->external;
     }
 
-    public function setExternal(?ExternalId $external): self
+    public function setExternal(ExternalId $external): self
     {
         $this->external = $external;
 
