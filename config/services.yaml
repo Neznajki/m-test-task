@@ -1,5 +1,7 @@
 imports:
     - { resource: 'services/security.yaml' }
+    - { resource: 'services/command.yaml' }
+    - { resource: 'services/repository.yaml' }
 
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
@@ -18,7 +20,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Command,DependencyInjection,Entity,Migrations,Tests,Repository,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -44,3 +46,5 @@ services:
 
     Symfony\Component\HttpFoundation\Request:
         factory: ['@request_stack', 'getCurrentRequest']
+
+    App\Service\FeedParserService: ~

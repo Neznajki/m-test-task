@@ -1,0 +1,57 @@
+services:
+
+    App\Repository\ExternalIdRepository:
+        class: App\Repository\ExternalIdRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\ExternalId'
+
+    App\Repository\FeedAuthorRepository:
+        class: App\Repository\FeedAuthorRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\FeedAuthor'
+
+    App\Repository\FeedLinkRepository:
+        class: App\Repository\FeedLinkRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\FeedLink'
+
+    App\Repository\FeedSummaryRepository:
+        class: App\Repository\FeedSummaryRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\FeedSummary'
+
+    App\Repository\FeedTitleRepository:
+        class: App\Repository\FeedTitleRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\FeedTitle'
+
+    App\Repository\MostCommonWordsRepository:
+        class: App\Repository\MostCommonWordsRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\MostCommonWords'
+
+    App\Repository\RelCollectionRepository:
+        class: App\Repository\RelCollectionRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\RelCollection'
+
+    App\Repository\TypeCollectionRepository:
+        class: App\Repository\TypeCollectionRepository
+        factory: ['@doctrine.orm.container_repository_factory', getRepository]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'App\Entity\TypeCollection'

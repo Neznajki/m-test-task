@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\Command\ImportDataCommand:
+        calls:
+            -   method: setHandlerService
+                arguments:
+                    - '@App\Service\FeedParserService'
+        tags:
+            - { name: 'console.command', command: 'app:import-data' }
