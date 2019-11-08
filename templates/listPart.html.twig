@@ -1,0 +1,18 @@
+<div>
+    {% for feedFullData in feedDataList %}
+        <div style="border: #222222; border-style: solid;">
+                <div class="title">
+                    {{ feedFullData.feedTitle.content|raw }}
+                </div>
+                <div class="link" style="display: inline-block">
+                    ({{ feedFullData.feedLinks|join(',')|raw }})
+                </div>
+                <div class="summary">
+                    {{ feedFullData.feedSummary.content|raw }}
+                </div>
+                <div class="author" style="display: inline-block">
+                    <a href="{{ feedFullData.feedAuthor.homepageUri }}" target="_blank">{{ feedFullData.feedAuthor.fullName|raw }}</a>
+                </div>
+        </div>
+    {% endfor %}
+</div>

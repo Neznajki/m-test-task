@@ -54,7 +54,7 @@ class FullFeedEntry
      */
     public function getFeedAuthor(): FeedAuthor
     {
-        return $this->feedAuthor;
+        return $this->externalId->getAuthor();
     }
 
     /**

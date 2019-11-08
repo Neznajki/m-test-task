@@ -72,7 +72,7 @@ class FeedLink
         return $this->id;
     }
 
-    public function getHref(): ?string
+    public function getHref(): string
     {
         return $this->href;
     }
@@ -132,5 +132,9 @@ class FeedLink
         return $this;
     }
 
-
+    public function __toString(): string
+    {
+        /** @noinspection HtmlUnknownTarget */
+        return sprintf('<a href="%s" target="_blank">%s</a>', $this->getHref(), $this->getHref());
+    }
 }

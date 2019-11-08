@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\WordsTotalOccurrenceRepository;
 use App\Repository\WordSupportedPlaceRepository;
+use App\Service\FeedFullDataGetterService;
 use App\Service\WordCounterService;
 use App\Service\WordFilterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,22 +18,26 @@ class SiteController extends AbstractController
     /** @var WordsTotalOccurrenceRepository */
     protected $wordsTotalOccurrenceRepository;
     /** @var WordCounterService */
-    protected $fullFeedDataGetterService;
+    protected $wordCounterService;
     /** @var WordFilterService */
     protected $wordFilterService;
     /** @var WordSupportedPlaceRepository */
     protected $supportedPlaceRepository;
+    /** @var FeedFullDataGetterService */
+    protected $feedFullDataGetterService;
 
     public function __construct(
         WordsTotalOccurrenceRepository $wordsTotalOccurrenceRepository,
-        WordCounterService $fullFeedDataGetterService,
+        WordCounterService $wordCounterService,
         WordFilterService $wordFilterService,
-        WordSupportedPlaceRepository $supportedPlaceRepository
+        WordSupportedPlaceRepository $supportedPlaceRepository,
+        FeedFullDataGetterService $feedFullDataGetterService
     ) {
         $this->wordsTotalOccurrenceRepository = $wordsTotalOccurrenceRepository;
-        $this->fullFeedDataGetterService      = $fullFeedDataGetterService;
+        $this->wordCounterService             = $wordCounterService;
         $this->wordFilterService              = $wordFilterService;
         $this->supportedPlaceRepository       = $supportedPlaceRepository;
+        $this->feedFullDataGetterService      = $feedFullDataGetterService;
     }
 
     /**
@@ -51,19 +56,19 @@ class SiteController extends AbstractController
     ): Response {
         $supportedPlaceIds = explode(',', $supportedPlaceIds);
         $this->wordFilterService->setRemovalData($rank, $removingItems);
-        $this->fullFeedDataGetterService->setWordFilterService($this->wordFilterService);
+        $this->wordCounterService->setWordFilterService($this->wordFilterService);
 
         $templateData = [
-            'mostCommonWords'       => $this->fullFeedDataGetterService->getTopWordCountCollection(
+            'mostCommonWords'       => $this->wordCounterService->getTopWordCountCollection(
                 $supportedPlaceIds,
                 $totalWords
             ),
-            'feedDataList'          => [],
+            'feedDataList'          => $this->feedFullDataGetterService->getFullFeedData(),
             'rank'                  => $rank,
             'allSupportedPlaces'    => $this->supportedPlaceRepository->findAll(),
             'chosenSupportedPlaces' => $supportedPlaceIds,
             'removingItems'         => $removingItems,
-            'totalWords' => $totalWords,
+            'totalWords'            => $totalWords,
 //            'error'           => $error,
         ];
 

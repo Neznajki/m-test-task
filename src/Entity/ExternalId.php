@@ -68,7 +68,7 @@ class ExternalId
     /**
      * @var FeedAuthor
      *
-     * @ORM\ManyToOne(targetEntity="FeedAuthor")
+     * @ORM\ManyToOne(targetEntity="FeedAuthor", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      * })
