@@ -1,0 +1,28 @@
+
+<label for="wordExclude" >Most Common Word remove amount</label>
+<input class="triggerChange" type="number" id="wordExclude" value="{{ removingItems }}"/>
+<br/>
+<label for="totalWords" >Amount of top words</label>
+<input class="triggerChange" type="number" id="totalWords" value="{{ totalWords }}"/>
+<br>
+
+
+<label for="oec" >OEC Rank</label>
+<input id="oec" class="triggerChange" type="radio" name="rank" value="oec" {% if rank == 'oec' %}checked="checked"{% endif %}/>
+<label for="coca" >COCA Rank</label>
+<input id="coca" class="triggerChange" type="radio" name="rank" value="coca" {% if rank == 'coca' %}checked="checked"{% endif %}/>
+<br/>
+{% for supportedPlace in allSupportedPlaces %}
+    <label for="{{ supportedPlace.sourceName }}">{{ supportedPlace.sourceName }}</label>
+    <input type="checkbox" id="{{ supportedPlace.sourceName }}" class="supportedPlace triggerChange" {% if supportedPlace.id in chosenSupportedPlaces %}checked="checked"{% endif %} value="{{ supportedPlace.id }}" />
+{% endfor %}
+<br/>
+<button type="button" id="changeSubmit">submit change</button>
+
+<div>
+    MOST USED WORDS :
+    {% for mostCommonWord in mostCommonWords  %}
+        <p title="{{ mostCommonWord.total }}" style="display: inline-block">{{ mostCommonWord.word.word }}</p>
+    {% endfor %}
+</div>
+

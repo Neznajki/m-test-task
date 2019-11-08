@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mintos Task {% endblock %}
+{% block body %}
+
+    <div>
+        {% include 'headPart.html.twig' with mostCommonWords %}
+    </div>
+
+    <div>
+        {% include'listPart.html.twig' with feedDataList %}
+    </div>
+{% endblock %}

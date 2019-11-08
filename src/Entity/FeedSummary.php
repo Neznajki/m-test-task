@@ -90,5 +90,11 @@ class FeedSummary implements ContentIncludedEntity
         return $this;
     }
 
-
+    /**
+     * @return string
+     */
+    public function getPlaceName(): string
+    {
+        return 'summary';
+    }
 }

@@ -14,5 +14,13 @@ interface ContentIncludedEntity
      */
     public function getContent(): string;
 
+    /**
+     * @return ExternalId
+     */
     public function getExternal(): ExternalId;
+
+    /**
+     * @return string
+     */
+    public function getPlaceName(): string;
 }

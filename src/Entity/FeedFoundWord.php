@@ -49,6 +49,16 @@ class FeedFoundWord
     private $word;
 
     /**
+     * @var WordSupportedPlace
+     *
+     * @ORM\ManyToOne(targetEntity="WordSupportedPlace")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="supported_place_id", referencedColumnName="id")
+     * })
+     */
+    private $supportedPlace;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -112,5 +122,19 @@ class FeedFoundWord
         $this->word = $word;
     }
 
+    /**
+     * @return WordSupportedPlace
+     */
+    public function getSupportedPlace(): WordSupportedPlace
+    {
+        return $this->supportedPlace;
+    }
 
+    /**
+     * @param WordSupportedPlace $supportedPlace
+     */
+    public function setSupportedPlace(WordSupportedPlace $supportedPlace): void
+    {
+        $this->supportedPlace = $supportedPlace;
+    }
 }

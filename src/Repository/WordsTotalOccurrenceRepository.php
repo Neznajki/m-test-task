@@ -55,7 +55,7 @@ class WordsTotalOccurrenceRepository extends EntityRepository
 
         $this->getEntityManager()->getConnection()->executeQuery(
             "INSERT INTO `{$tempTableName}`
-SELECT null, ffw.word_id, {$wordSupportedPlace->getId()}, 1
+SELECT null, ffw.word_id, ffw.supported_place_id, 1
 FROM `{$tableFeedFound}` as ffw
 JOIN `{$tableExternal}` as ei on ei.id = ffw.external_id
 JOIN `{$tableSourcePlace}` as fs on ei.id = fs.external_id

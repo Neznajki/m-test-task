@@ -10,6 +10,13 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
+    assets:
+        packages:
+            js:
+                base_urls: '%env(GUI_URI)%/js'
+            css:
+                base_urls: '%env(GUI_URI)%/css'
+
     #esi: true
     #fragments: true
     php_errors:

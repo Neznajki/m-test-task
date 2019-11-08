@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Contract\ContentIncludedEntity;
 use App\Entity\FeedFoundWord;
 use App\Entity\Word;
+use App\Entity\WordSupportedPlace;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -64,6 +65,11 @@ class FeedFoundWordRepository extends EntityRepository
 
         $new->setWord($word);
         $new->setExternal($entity->getExternal());
+        $new->setSupportedPlace(
+            $this->getEntityManager()
+                ->getRepository(WordSupportedPlace::class)
+                ->findOneBy(['sourceName' => $entity->getPlaceName()])
+        );
         $new->setIsMarkedForDelete(false);
 
         $this->getEntityManager()->persist($new);

@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('jquery-3.4.1.min.js', 'js') }}"></script>
+        <script type="text/javascript" src="{{ asset('objects/Configuration.js', 'js') }}"></script>
+        <script type="text/javascript" src="{{ asset('base.js', 'js') }}"></script>
     </head>
     <body>
         {% block body %}{% endblock %}

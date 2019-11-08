@@ -112,4 +112,11 @@ class FeedTitle implements ContentIncludedEntity
     }
 
 
+    /**
+     * @return string
+     */
+    public function getPlaceName(): string
+    {
+        return 'title';
+    }
 }
